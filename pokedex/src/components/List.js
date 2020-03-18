@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../components/List.css';
 import PropTypes from 'prop-types';
+import Popup from "reactjs-popup";
 
 
 export class PokeList extends Component {
@@ -170,11 +171,30 @@ export class Unique extends Component {
 
 
 export class PokemonInfo extends Component {
+
     render() {
         return (
             <div>
 
-                <div>{this.props.object.name}
+                <div><Popup modal trigger={<button>{this.props.object.name}</button>}>
+                    <div>{this.props.object.name}</div>
+                    <div>{this.props.object.num}</div>
+                    <div><img src={this.props.object.img} /></div>
+                    Types:
+                        <div>{this.props.object.type.map((item, index) => (
+                        <PokemonDetailedList object={item} key={index} />
+                    ))
+                    }</div>
+                    Weaknesses:
+                        <div>{this.props.object.weaknesses.map((item, index) => (
+                        <PokemonDetailedList object={item} key={index} />
+                    ))
+                    }</div>
+                    <div>{this.props.object.height}</div>
+                    <div>{this.props.object.weight}</div>
+                    <div>{this.props.object.prev_evolution}</div>
+                    <button>close</button>
+                </Popup>
                     <div>
 
                         <div>{this.props.object.num}</div>
